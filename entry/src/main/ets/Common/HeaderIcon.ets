@@ -7,7 +7,7 @@ export  struct HeaderIcon {
   build() {
     Row() {
       Image(this.src)
-        .size({ width: '24vp', height: '24vp' })
+        .size({ width: '20vp', height: '20vp' })
         .fillColor(getTheme().colorScheme.onSurfaceContainer)
 
     }

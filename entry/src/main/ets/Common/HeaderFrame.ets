@@ -34,9 +34,9 @@ export struct HeaderFrame {
 
         Text(this.title)
           .textAlign(TextAlign.Center)
-          .fontSize('18fp')
+          .fontSize('14fp')
           .fontColor(getTheme().colorScheme.onSurfaceContainer)
-          .fontWeight(FontWeight.Medium)
+          .fontWeight(FontWeight.Bold)
           .id('title')
           .alignRules({
             center: {
