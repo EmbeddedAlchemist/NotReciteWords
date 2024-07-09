@@ -134,7 +134,7 @@ struct Signage {
       }) {
         GridCol() {
           this.reviewItem(
-            $r('app.media.sort_24px_rounded'),
+            $r('app.media.bar_chart_24dp_5F6368_FILL0_wght400_GRAD0_opsz24'),
             '#e2be30',
             '今日学习&复习',
             '2',
@@ -144,7 +144,7 @@ struct Signage {
 
         GridCol() {
           this.reviewItem(
-            $r('app.media.multiline_chart_24px_rounded'),
+            $r('app.media.finance_24dp_5F6368_FILL0_wght400_GRAD0_opsz24'),
             '#d1656c',
             '累计学习',
             '5370',
@@ -155,7 +155,7 @@ struct Signage {
 
         GridCol() {
           this.reviewItem(
-            $r('app.media.pie_chart_outline_24px_rounded'),
+            $r('app.media.avg_pace_24dp_5F6368_FILL0_wght400_GRAD0_opsz24'),
             '#e2be30',
             '今日总时长',
             '7',
@@ -165,7 +165,7 @@ struct Signage {
 
         GridCol() {
           this.reviewItem(
-            $r('app.media.schedule_24px_rounded'),
+            $r('app.media.schedule_24dp_5F6368_FILL0_wght400_GRAD0_opsz24'),
             '#d1656c',
             '累计时长',
             '4069',
