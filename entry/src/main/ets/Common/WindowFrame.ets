@@ -35,7 +35,6 @@ import { emptyBuilder } from './emptyBuilder'
 export struct WindowFrame {
   @BuilderParam
   header: () => any = emptyBuilder;
-
   @BuilderParam
   content: () => any = emptyBuilder;
 
@@ -46,12 +45,10 @@ export struct WindowFrame {
       }
       .width('100%')
 
-      Scroll() {
-        Column() {
-          this.content();
-        }
-        .width('100%')
+      Column() {
+        this.content();
       }
+      .width('100%')
       .size({ width: '100%', height: '100%' })
       .align(Alignment.Top)
     }

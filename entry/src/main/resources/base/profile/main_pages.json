@@ -1,6 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/Signage"
+    "pages/Signage",
+    "pages/BookSelect"
   ]
 }
