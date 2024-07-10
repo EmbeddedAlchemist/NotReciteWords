@@ -9,7 +9,7 @@ declare type ThemeItem = Resource | string | Color;
  * Low表示弱化，High表示强调
  */
 // TODO: 按需添加条目
-export type  ColorScheme = {
+export type ColorScheme = {
   surface: ThemeItem;
   onSurface: ThemeItem;
   onSurfaceLow: ThemeItem;
@@ -19,10 +19,13 @@ export type  ColorScheme = {
   onPrimary: ThemeItem;
   primaryContainer: ThemeItem;
   onPrimaryContainer: ThemeItem;
+  outline:ThemeItem;
 }
 
-// 主题用到的资源在这里添加
-export type ThemeResource ={}
+
+export type ThemeResource = {
+  // 主题用到的资源在这里添加
+};
 
 export type Theme = {
   colorScheme: ColorScheme;
@@ -39,12 +42,14 @@ const ThemeLight: Theme = {
     primary: '#FF6400',
     onPrimary: '#FFFFFF',
     primaryContainer: '#F8E2D5',
-    onPrimaryContainer: '#FF6400'
+    onPrimaryContainer: '#FF6400',
+    outline: '#808080'
+
   },
   resource: {}
 }
 
-const ThemeDark : Theme = {
+const ThemeDark: Theme = {
   colorScheme: {
     surface: '#202020',
     onSurface: '#F4F4F4',
@@ -55,6 +60,7 @@ const ThemeDark : Theme = {
     onPrimary: '#FFFFFF',
     primaryContainer: '#F8E2D5',
     onPrimaryContainer: '#FF6400',
+    outline: '#808080'
   },
   resource: {}
 }
@@ -69,8 +75,10 @@ export function setTheme(themeType: ThemeType): void {
 }
 
 export function getTheme(): Theme {
-  switch(currentTheme){
-    case ThemeType.Light : return ThemeLight;
-    case ThemeType.Dark : return ThemeDark;
+  switch (currentTheme) {
+    case ThemeType.Light:
+      return ThemeLight;
+    case ThemeType.Dark:
+      return ThemeDark;
   }
 }
