@@ -30,7 +30,7 @@ struct Login{
   build() {
     Column(){
 
-      Text("知道单词")
+      Text("不背单词")
         .fontSize(40)
         .margin({
           top : 80

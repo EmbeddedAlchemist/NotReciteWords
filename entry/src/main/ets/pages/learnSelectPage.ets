@@ -34,6 +34,118 @@ struct learnSelectPage {
         { enValue: "banana split", cnValue: "香蕉船" }
       ]
     ),
+    new Word(
+      { enValue: "Moon", cnValue: "月亮", type: "n" },
+      { enValue: "The moon influences the tides on Earth.", cnValue: "月亮影响着地球上的潮汐。" },
+      [
+        { cnValue: "月亮", type: "名词" },
+        { cnValue: "满月", type: "名词" },
+        { cnValue: "新月", type: "名词" },
+        { cnValue: "月食", type: "名词" }
+      ],
+      [
+        { enValue: "moonlight", cnValue: "月光" },
+        { enValue: "lunar eclipse", cnValue: "月食" }
+      ]
+    ),
+    new Word(
+      { enValue: "Sun", cnValue: "太阳", type: "n" },
+      { enValue: "The sun is the center of our solar system.", cnValue: "太阳是我们太阳系的中心。" },
+      [
+        { cnValue: "太阳", type: "名词" },
+        { cnValue: "日食", type: "名词" },
+        { cnValue: "日出", type: "名词" },
+        { cnValue: "日落", type: "名词" }
+      ],
+      [
+        { enValue: "sunlight", cnValue: "阳光" },
+        { enValue: "solar panel", cnValue: "太阳能板" }
+      ]
+    ),
+    new Word(
+      { enValue: "Book", cnValue: "书", type: "n" },
+      { enValue: "Books are the quietest and most constant of friends.", cnValue: "书是最安静和最恒久的朋友。" },
+      [
+        { cnValue: "书", type: "名词" },
+        { cnValue: "小说", type: "名词" },
+        { cnValue: "教科书", type: "名词" },
+        { cnValue: "漫画书", type: "名词" }
+      ],
+      [
+        { enValue: "book shelf", cnValue: "书架" },
+        { enValue: "book cover", cnValue: "书皮" }
+      ]
+    ),
+    new Word(
+      { enValue: "Car", cnValue: "汽车", type: "n" },
+      { enValue: "Cars have revolutionized the way we travel.", cnValue: "汽车彻底改变了我们的出行方式。" },
+      [
+        { cnValue: "汽车", type: "名词" },
+        { cnValue: "轿车", type: "名词" },
+        { cnValue: "跑车", type: "名词" },
+        { cnValue: "SUV", type: "名词" }
+      ],
+      [
+        { enValue: "car engine", cnValue: "汽车引擎" },
+        { enValue: "car tire", cnValue: "汽车轮胎" }
+      ]
+    ),
+    new Word(
+      { enValue: "Flower", cnValue: "花", type: "n" },
+      { enValue: "Flowers are often used to express emotions.", cnValue: "花常用来表达情感。" },
+      [
+        { cnValue: "花", type: "名词" },
+        { cnValue: "玫瑰", type: "名词" },
+        { cnValue: "牡丹", type: "名词" },
+        { cnValue: "郁金香", type: "名词" }
+      ],
+      [
+        { enValue: "flower pot", cnValue: "花盆" },
+        { enValue: "flower bed", cnValue: "花坛" }
+      ]
+    ),
+    new Word(
+      { enValue: "Tree", cnValue: "树", type: "n" },
+      { enValue: "Trees are an important part of the ecosystem.", cnValue: "树是生态系统的重要组成部分。" },
+      [
+        { cnValue: "树", type: "名词" },
+        { cnValue: "橡树", type: "名词" },
+        { cnValue: "松树", type: "名词" },
+        { cnValue: "柳树", type: "名词" }
+      ],
+      [
+        { enValue: "tree branch", cnValue: "树枝" },
+        { enValue: "tree trunk", cnValue: "树干" }
+      ]
+    ),
+    new Word(
+      { enValue: "Fish", cnValue: "鱼", type: "n" },
+      { enValue: "Fish are aquatic animals with gills.", cnValue: "鱼是具有鳃的水生动物。" },
+      [
+        { cnValue: "鱼", type: "名词" },
+        { cnValue: "金鱼", type: "名词" },
+        { cnValue: "鲤鱼", type: "名词" },
+        { cnValue: "鲨鱼", type: "名词" }
+      ],
+      [
+        { enValue: "fish tank", cnValue: "鱼缸" },
+        { enValue: "fish food", cnValue: "鱼食" }
+      ]
+    ),
+    new Word(
+      { enValue: "Bird", cnValue: "鸟", type: "n" },
+      { enValue: "Birds are a group of warm-blooded vertebrates.", cnValue: "鸟类是一群温血脊椎动物。" },
+      [
+        { cnValue: "鸟", type: "名词" },
+        { cnValue: "麻雀", type: "名词" },
+        { cnValue: "鹦鹉", type: "名词" },
+        { cnValue: "鹰", type: "名词" }
+      ],
+      [
+        { enValue: "bird feeder", cnValue: "鸟食台" },
+        { enValue: "bird cage", cnValue: "鸟笼" }
+      ]
+    )
   ]
   @State currentWord: Word = this.currentWords[0]
   // @State pointValue1
@@ -194,7 +306,14 @@ struct learnSelectPage {
           this.isNextVisible = false
           this.isListVisible = true
           this.options = []
-          this.index++
+          if(this.index < 10){
+            this.index++
+          }
+          else {
+            router.pushUrl({
+              url:"pages/MainPage"
+            })
+          }
           this.InitWord()
         })
       Blank()
