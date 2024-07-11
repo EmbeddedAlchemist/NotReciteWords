@@ -13,6 +13,7 @@ export type ColorScheme = {
   surface: ThemeItem;
   onSurface: ThemeItem;
   onSurfaceLow: ThemeItem;
+  onSurfaceLowest: ThemeItem;
   surfaceContainer: ThemeItem;
   onSurfaceContainer: ThemeItem;
   primary: ThemeItem;
@@ -37,6 +38,7 @@ const ThemeLight: Theme = {
     surface: '#FFFFFF',
     onSurface: '#202020',
     onSurfaceLow: '#777777',
+    onSurfaceLowest: '#B0B0B0',
     surfaceContainer: '#F4F4F4',
     onSurfaceContainer: '#202020',
     primary: '#FF6400',
@@ -54,6 +56,7 @@ const ThemeDark: Theme = {
     surface: '#202020',
     onSurface: '#F4F4F4',
     onSurfaceLow: '#999999',
+    onSurfaceLowest: '#505050',
     surfaceContainer: '#000000',
     onSurfaceContainer: '#F4F4F4',
     primary: '#FF6400',

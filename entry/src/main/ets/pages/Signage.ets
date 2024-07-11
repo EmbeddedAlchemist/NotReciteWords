@@ -2,6 +2,9 @@ import { WindowFrame } from 'ets/Common/WindowFrame'
 import { HeaderFrame } from 'ets/Common/HeaderFrame'
 import { HeaderIcon } from 'ets/Common/HeaderIcon'
 import { getTheme } from 'ets/Common/Theme'
+import distributedKVStore from '@ohos.data.distributedKVStore'
+import featureAbility from '@ohos.ability.featureAbility'
+import router from '@ohos.router'
 
 
 @Styles function styleSolidCard() {
@@ -18,25 +21,62 @@ import { getTheme } from 'ets/Common/Theme'
 
 @Component
 struct StudyProgressCard {
-  @State bookCoverImg:  Resource | PixelMap = $r('app.media.book_cover');
+  @State bookCoverImg: Resource | PixelMap = $r('app.media.book_cover');
   @State totalWordCount: number = 2213;
   @State learnedWordCount: number = 535;
-  @State markedWordCount:number = 0;
+  @State markedWordCount: number = 0;
+
+  @Builder bookOptionMenu() {
+    Menu() {
+      MenuItem({ content: '查看词书单词表' })
+      MenuItem({ content: '下载离线单词包' })
+      MenuItem({ content: '重学词书' })
+      MenuItem({ content: '更新词书' })
+    }
+
+  }
 
   build() {
     Column({ space: '20vp' }) {
-      Scroll() {
-        Row() {
-          Image(this.bookCoverImg)
+      Flex() {
+        Scroll() {
+          Row({ space: '20vp' }) {
+            Image(this.bookCoverImg)
+              .height('100%')
+              .borderRadius('8vp')
+            Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
+              Text('配套真题词组')
+                .fontSize('12fp')
+                .fontColor(getTheme().colorScheme.onSurface)
+                .margin({ bottom: '8vp' })
+              Column() {
+                Image($r('app.media.icon_add'))
+                  .size({ width: '20vp', height: '20vp' })
+                  .fillColor(getTheme().colorScheme.onSurfaceLowest)
+              }
+              .width('100%')
+              .height('100%')
+              .border({ color: getTheme().colorScheme.onSurfaceLowest, radius: '4vp', width: '1vp' })
+              .align(Alignment.Center)
+              .justifyContent(FlexAlign.Center)
+            }
             .height('100%')
-            .borderRadius('8vp')
+            .width('80vp')
+
+          }
+          .alignSelf(ItemAlign.Start)
         }
-        .alignSelf(ItemAlign.Start)
+        .scrollable(ScrollDirection.Horizontal)
+        .width('100%')
+        .height('128vp')
+        .align(Alignment.Start)
+
+        Image($r('app.media.icon_more_vert'))
+          .size({ width: '24vp', height: '24vp' })
+          .fillColor(getTheme().colorScheme.onSurfaceLow)
+          .bindMenu(this.bookOptionMenu)
       }
-      .scrollable(ScrollDirection.Horizontal)
       .width('100%')
-      .height('128vp')
-      .align(Alignment.Start)
 
       Row({ space: '4vp' }) {
         Checkbox()
@@ -235,6 +275,9 @@ struct Signage {
   @Builder
   headerLeftSlot() {
     HeaderIcon({ src: $r('app.media.icon_keyboard_arrow_down') })
+      .onClick(event => {
+        router.back()
+      })
   }
 
   @Builder
@@ -253,39 +296,43 @@ struct Signage {
 
   @Builder
   content() {
-    Column({ space: '16vp' }) {
-      Row() {
-        Text('正在学习')
+    Scroll() {
+      Column({ space: '16vp' }) {
+        Row() {
+          Text('正在学习')
+            .styleHeader()
+            .margin({ top: '10vp' })
+          Button('换本词书')
+            .fontColor(getTheme().colorScheme.onPrimaryContainer)
+            .backgroundColor(getTheme().colorScheme.primaryContainer)
+            .fontSize('12fp')
+            .height('0vp')
+            .padding({ left: '12vp', right: '12vp', top: '6vp', bottom: '6vp' })
+            .onClick(event => {
+              router.pushUrl({ url: 'pages/BookSelect' })
+            })
+        }
+        .width('100%')
+        .alignItems(VerticalAlign.Bottom)
+        .justifyContent(FlexAlign.SpaceBetween)
+
+        StudyProgressCard();
+
+        Text('我的数据')
           .styleHeader()
           .margin({ top: '10vp' })
-        Button('换本词书')
-          .fontColor(getTheme().colorScheme.onPrimaryContainer)
-          .backgroundColor(getTheme().colorScheme.primaryContainer)
-          .fontSize('12fp')
-          .fontWeight(FontWeight.Bold)
-          .height('0vp')
-          .padding({ left: '12vp', right: '12vp', top: '6vp', bottom: '6vp' })
+
+
+        DataPreviewCard()
+        CalendarCard()
+
+        Blank().height('50vp')
+
       }
       .width('100%')
-      .alignItems(VerticalAlign.Bottom)
-      .justifyContent(FlexAlign.SpaceBetween)
-
-      StudyProgressCard();
-
-      Text('我的数据')
-        .styleHeader()
-        .margin({ top: '10vp' })
-
-
-      DataPreviewCard()
-      CalendarCard()
-
-      Blank().height('50vp')
-
+      .alignItems(HorizontalAlign.Start)
+      .padding({ left: '20vp', right: '20vp' })
     }
-    .width('100%')
-    .alignItems(HorizontalAlign.Start)
-    .padding({ left: '20vp', right: '20vp' })
 
   }
 
@@ -298,4 +345,5 @@ struct Signage {
 
     }
   }
+
 }
