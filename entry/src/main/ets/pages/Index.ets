@@ -39,4 +39,9 @@ struct Index {
     .height('100%')
 
   }
+
+
+  aboutToAppear(){
+    router.replaceUrl({url:'pages/Login'})
+  }
 }

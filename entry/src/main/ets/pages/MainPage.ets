@@ -139,7 +139,7 @@ struct MainPage {
           Image($r("app.media.bag"))
         }.onClick(() => {
           router.pushUrl({
-            url : ""
+            url : "pages/PersonPage"
           })
         })
         .width("12%")
@@ -153,7 +153,7 @@ struct MainPage {
           Image($r("app.media.DataTable"))
         }.onClick(() => {
           router.pushUrl({
-            url : ""
+            url : "pages/Signage"
           })
         })
         .width("12%")

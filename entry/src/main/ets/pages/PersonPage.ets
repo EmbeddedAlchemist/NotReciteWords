@@ -11,6 +11,7 @@ struct MainPage {
               right:285,
               top:5
             })
+              .onClick( e=> router.back())
             Image($r("app.media.task")).width(24).onClick(() =>{
               router.pushUrl({
                 url:"pages/message"
