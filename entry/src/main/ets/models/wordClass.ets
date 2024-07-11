@@ -1,5 +1,7 @@
 export class Word {
   isDelete:boolean = false
+  isCollection:boolean = false
+  correctIndex:number = 0
   correctTimes: number = 0
   word: {enValue: string, cnValue: string, type: string}
   exampleSentence: {enValue: string, cnValue: string}
@@ -22,4 +24,7 @@ export class Word {
     }
     return false
   }
+
 }
+
+
