@@ -13,6 +13,7 @@
     "pages/message",
     "pages/studySetting",
     "pages/PersonPage",
-    "pages/MoreSetting"
+    "pages/MoreSetting",
+    "pages/MyContentPage"
   ]
 }

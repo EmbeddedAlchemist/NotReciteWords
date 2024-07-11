@@ -53,7 +53,7 @@ struct MainPage {
         }
         .onClick(() => {
           router.pushUrl({
-            url: ""
+            url: "pages/PersonPage"
           })
         })
         .margin({
@@ -67,6 +67,7 @@ struct MainPage {
             top : 20,
             right : 140
           })
+
       }
 
      MySwiper()
@@ -139,7 +140,7 @@ struct MainPage {
           Image($r("app.media.bag"))
         }.onClick(() => {
           router.pushUrl({
-            url : "pages/PersonPage"
+            url : "pages/MyContentPage"
           })
         })
         .width("12%")
