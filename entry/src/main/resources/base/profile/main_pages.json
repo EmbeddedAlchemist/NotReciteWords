@@ -3,7 +3,7 @@
     "pages/Index",
     "pages/message",
     "pages/studySetting",
-    "pages/MainPage",
+    "pages/PersonPage",
     "pages/MoreSetting"
   ]
 }
