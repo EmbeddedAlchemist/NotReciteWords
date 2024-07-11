@@ -1,6 +1,6 @@
 import { ContentListenBean } from '../model/ContentListenBean'
 import vm from "../viewmodel/MainViewModel"
-
+import router from '@ohos.router'
 @Entry
 @Component
 struct MyContentPage {
@@ -21,6 +21,9 @@ struct MyContentHeader {
       Image($r("app.media.school_return"))
         .width(23)
         .height(23)
+        .onClick(()=>{
+          router.back()
+        })
 
       Text("我的内容")
         .fontSize(20)
