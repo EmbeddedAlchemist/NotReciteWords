@@ -3,6 +3,13 @@
     "pages/Index",
     "pages/Signage",
     "pages/BookSelect",
-    "pages/WordList"
+    "pages/WordList",
+    "pages/learnSelectPage",
+    "pages/Signage",
+    "pages/MainPage",
+    "pages/ReciteSchoolPage",
+    "pages/Enroll_Page",
+    "pages/Progress_Page",
+    "pages/Login"
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "words": [
+    {
+      "isDelete": false,
+      "correctIndex": 0,
+      "correctTimes": 0,
+      "word": {
+        "enValue": "example",
+        "cnValue": "例子",
+        "type": "noun"
+      },
+      "exampleSentence": {
+        "enValue": "This is an example sentence.",
+        "cnValue": "这是一个例句。"
+      },
+      "options": [
+        {
+          "cnValue": "选项1",
+          "type": "type1"
+        },
+        {
+          "cnValue": "选项2",
+          "type": "type2"
+        }
+      ],
+      "phrase": [
+        {
+          "enValue": "phrase1",
+          "cnValue": "短语1"
+        },
+        {
+          "enValue": "phrase2",
+          "cnValue": "短语2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import backgroundTaskManager from '@ohos.backgroundTaskManager'
+import router from '@ohos.router'
 @Entry
 @Component
 struct ReciteSchoolPage {
@@ -26,7 +28,9 @@ struct MySchoolHeader {
         .height(25)
         .margin({
           left: 6
-        })
+        }).onClick(()=>{
+        router.back()
+      })
       Text("不背学堂")
         .fontSize(20)
         .fontWeight(FontWeight.Medium)
