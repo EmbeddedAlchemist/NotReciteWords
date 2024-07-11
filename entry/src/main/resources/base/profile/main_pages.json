@@ -10,6 +10,10 @@
     "pages/ReciteSchoolPage",
     "pages/Enroll_Page",
     "pages/Progress_Page",
-    "pages/Login"
+    "pages/Login",
+    "pages/message",
+    "pages/studySetting",
+    "pages/PersonPage",
+    "pages/MoreSetting"
   ]
 }
