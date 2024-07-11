@@ -11,18 +11,18 @@ export namespace YouDaoDict {
   const BUFFER_FILE_PATH = '/you_dao_dict_cache.json';
 
   export type QueryResult = {
-    source: string;
+    source: string;         // 原始单词
     pronunciation: {
-      en?: string;
-      us?: string;
+      en?: string;          //英式音标
+      us?: string;          //美式音标
     };
     meaning: Array<{
-      position?: string;
-      translation: string;
+      position?: string;    //词性
+      translation: string;  //释义
     }>;
     sentence: Array<{
-      sentence: string;
-      translation: string;
+      sentence: string;     // 例句英文
+      translation: string;  //例句翻译
     }>;
   };
 
