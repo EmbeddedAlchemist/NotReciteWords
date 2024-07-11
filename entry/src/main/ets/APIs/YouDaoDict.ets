@@ -103,6 +103,6 @@ export namespace YouDaoDict {
     })
 
     cacheAdd(word, result);
-    return res
+    return result;
   }
 }

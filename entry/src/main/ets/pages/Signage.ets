@@ -44,6 +44,7 @@ struct StudyProgressCard {
             Image(this.bookCoverImg)
               .height('100%')
               .borderRadius('8vp')
+            .onClick(e=>router.pushUrl({url:'pages/WordList'}))
             Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
               Text('配套真题词组')
                 .fontSize('12fp')
