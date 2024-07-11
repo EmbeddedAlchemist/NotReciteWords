@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/Signage",
-    "pages/BookSelect"
+    "pages/BookSelect",
+    "pages/WordList"
   ]
 }

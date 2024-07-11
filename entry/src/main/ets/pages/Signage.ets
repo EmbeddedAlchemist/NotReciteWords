@@ -4,6 +4,7 @@ import { HeaderIcon } from 'ets/Common/HeaderIcon'
 import { getTheme } from 'ets/Common/Theme'
 import distributedKVStore from '@ohos.data.distributedKVStore'
 import featureAbility from '@ohos.ability.featureAbility'
+import router from '@ohos.router'
 
 
 @Styles function styleSolidCard() {
@@ -274,6 +275,9 @@ struct Signage {
   @Builder
   headerLeftSlot() {
     HeaderIcon({ src: $r('app.media.icon_keyboard_arrow_down') })
+      .onClick(event => {
+        router.back()
+      })
   }
 
   @Builder
@@ -304,6 +308,9 @@ struct Signage {
             .fontSize('12fp')
             .height('0vp')
             .padding({ left: '12vp', right: '12vp', top: '6vp', bottom: '6vp' })
+            .onClick(event => {
+              router.pushUrl({ url: 'pages/BookSelect' })
+            })
         }
         .width('100%')
         .alignItems(VerticalAlign.Bottom)
@@ -338,4 +345,5 @@ struct Signage {
 
     }
   }
+
 }
