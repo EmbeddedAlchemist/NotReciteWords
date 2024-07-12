@@ -5,6 +5,7 @@ import { getTheme } from 'ets/Common/Theme'
 import distributedKVStore from '@ohos.data.distributedKVStore'
 import featureAbility from '@ohos.ability.featureAbility'
 import router from '@ohos.router'
+import { StudyStatus } from '../User/StudyStatus'
 
 
 @Styles function styleSolidCard() {
@@ -21,7 +22,7 @@ import router from '@ohos.router'
 
 @Component
 struct StudyProgressCard {
-  @State bookCoverImg: Resource | PixelMap = $r('app.media.book_cover');
+  @State bookCoverImg: Resource | PixelMap  = $r('app.media.book_cover');
   @State totalWordCount: number = 2213;
   @State learnedWordCount: number = 535;
   @State markedWordCount: number = 0;
@@ -110,6 +111,17 @@ struct StudyProgressCard {
     .styleSolidCard()
     .width('100%')
     .padding('20vp')
+  }
+
+  async loadData(){
+    let currBook = await StudyStatus.getWordBook();
+    //this.bookCoverImg = currBook.cover;
+    this.totalWordCount = currBook.totalWordCount;
+    this.learnedWordCount = currBook.learnedWordCount;
+  }
+
+  aboutToAppear(){
+    this.loadData();
   }
 }
 

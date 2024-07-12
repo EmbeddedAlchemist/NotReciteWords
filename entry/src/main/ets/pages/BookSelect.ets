@@ -168,57 +168,6 @@ struct BookSelect {
     }
   }
 
-  // parseBookList(obj:Object){
-  //   type listItem = {
-  //     id:string;
-  //     name:string;
-  //     desc:string;
-  //     word_count:number;
-  //     type:string;
-  //     tag:string[];
-  //   }
-  //   if(!(obj['list'] instanceof Array))
-  //     return;
-  //   let tmp:Record<string, Array<listItem>> = {};
-  //   (obj['list'] as Array<listItem>).forEach(item => {
-  //     if(tmp[item.type] === undefined)
-  //       tmp[item.type] = [];
-  //     tmp[item.type].push(item);
-  //   })
-  //
-  //   for(const key in tmp){
-  //     let tp:BookType = {name:key, item:[]};
-  //     tmp[key].forEach(elem => {
-  //       tp.item.push({
-  //         id:elem.id,
-  //         name:elem.name,
-  //         desc: elem.desc,
-  //         wordCount:elem.word_count,
-  //         cover:`${server.ip}/books/${elem.id}/cover.png`
-  //       });
-  //     })
-  //     this.books.push(tp);
-  //   }
-  // }
-  //
-  // requestBookList(){
-  //   let httpRequest = http.createHttp();
-  //   console.info("HTTP_REQ", "About to req", server.ip + 'book_list.json')
-  //   httpRequest.request(
-  //     `${server.ip}/book_list.json`,
-  //     { method: http.RequestMethod.GET },
-  //     (err, data: http.HttpResponse) => {
-  //       if (err) {
-  //         console.error("HTTP_REQ", "ERROR:", err.message);
-  //         return
-  //       }
-  //       let rawResponse = data.result.toString();
-  //       let response = JSON.parse(rawResponse)
-  //       this.parseBookList(response);
-  //     }
-  //   )
-  // }
-
   async loadBookList() {
 
     try {

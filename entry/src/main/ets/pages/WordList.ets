@@ -7,19 +7,61 @@ import { WindowFrame } from '../Common/WindowFrame'
 import { StudyStatus } from '../User/StudyStatus'
 import { WordBook } from '../User/WordBook'
 
-type WordItem = {
-  word: string;
-  explain: boolean;
-  queryResult?: YouDaoDict.QueryResult;
-}
+// type WordItem = {
+//   word: string;
+//   explain: boolean;
+//   queryResult?: YouDaoDict.QueryResult;
+// }
 
+@Component
+struct WordItem{
+  @State explain:boolean = false;
+  word:string = '';
+  @State queryResult?: YouDaoDict.QueryResult = undefined;
+
+  build(){
+    Column({ space: '12vp' }) {
+      Row({ space: '6vp' }) {
+        Text(this.word)
+          .fontSize('18fp')
+          .fontWeight(FontWeight.Bold)
+          .fontColor(getTheme().colorScheme.onSurface)
+        if (this.explain) {
+          Text(`/${this.queryResult.pronunciation.us}/`)
+            .fontSize('18fp')
+            .fontWeight(FontWeight.Normal)
+            .fontColor(getTheme().colorScheme.onSurfaceLow)
+        }
+      }
+
+      if (this.explain) {
+        Column({space:'4vp'}) {
+          ForEach(this.queryResult.meaning, m => {
+            Text(`${m.position} ${m.translation}}`)
+              .fontSize('14fp')
+              .fontColor(getTheme().colorScheme.onSurface)
+          })
+        }
+        .alignItems(HorizontalAlign.Start)
+      }
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+    .padding({ left: '20vp', right: '20vp', top: '10vp', bottom: '10vp' })
+    .backgroundColor(this.explain?getTheme().colorScheme.surface : getTheme().colorScheme.surfaceContainer)
+    .onClick(async e => {
+      this.queryResult = await YouDaoDict.query(this.word);
+      this.explain = true;
+    })
+  }
+}
 
 @Entry
 @Component
 struct WordList {
   @BuilderParam title: string = '词汇表'
-  @State wordList: WordItem[] = [];
-  @State explainIndex:number = -1;
+  wordList: string[] = [];
+
 
   @Builder
   headerLeftSlot() {
@@ -42,49 +84,13 @@ struct WordList {
     })
   }
 
-  @Builder
-  buildWordItem(index: number, item: WordItem) {
-    Column({ space: '12vp' }) {
-      Row({ space: '6vp' }) {
-        Text(item.word)
-          .fontSize('18fp')
-          .fontWeight(FontWeight.Bold)
-          .fontColor(getTheme().colorScheme.onSurface)
-        if (index == this.explainIndex) {
-          Text(`/${item.queryResult.pronunciation.us}/`)
-            .fontSize('18fp')
-            .fontWeight(FontWeight.Normal)
-            .fontColor(getTheme().colorScheme.onSurfaceLow)
-        }
-      }
-
-      if (index == this.explainIndex) {
-        Column() {
-          ForEach(item.queryResult.meaning, m => {
-            Text(`${m.position}${m.translation}}`);
-          })
-        }
-        .alignItems(HorizontalAlign.Start)
-      }
-    }
-    .alignItems(HorizontalAlign.Start)
-    .width('100%')
-    .padding({ left: '20vp', right: '20vp', top: '10vp', bottom: '10vp' })
-    .onClick(async e => {
-      let i = item;
-      i.queryResult = await YouDaoDict.query(item.word);
-      i.explain = true;
-      this.wordList[index] = i;
-      this.explainIndex = index;
-    })
-  }
 
   @Builder
   content() {
     List() {
-      ForEach(this.wordList, (elem, index) => {
+      ForEach(this.wordList, (elem:string, index) => {
         ListItem() {
-          this.buildWordItem(index, elem);
+          WordItem({word:elem})
         }
         .width('100%')
       })
@@ -107,13 +113,11 @@ struct WordList {
     try {
       wordBook = await StudyStatus.getWordBook();
       for (const key in wordBook.wordList) {
-        this.wordList.push({ word: key, explain: false })
+        this.wordList.push(key)
       }
     } catch (e) {
       console.log(e);
     }
-
-    console.log("");
   }
 
   aboutToAppear() {

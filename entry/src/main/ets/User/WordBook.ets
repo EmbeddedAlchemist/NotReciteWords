@@ -2,6 +2,8 @@ import fs from '@ohos.file.fs';
 import util from '@ohos.util';
 import http from '@ohos.net.http';
 import { server } from '../Server';
+import image from '@ohos.multimedia.image';
+import fileUri from '@ohos.file.fileuri';
 
 
 export namespace WordBook {
@@ -83,6 +85,7 @@ export namespace WordBook {
     name: string;
     desc: string;
     total_word_count: number;
+    learned_word_count: number;
     type: string;
   }
 
@@ -98,7 +101,7 @@ export namespace WordBook {
     learnedWordCount: number;
     wordList: LocalBookWordList;
 
-    private constructor(wordBook: WordBook, wordList: LocalBookWordList) {
+    private constructor(wordBook: WordBook, wordList: LocalBookWordList, learnedCount: number) {
       this.id = wordBook.id;
       this.name = wordBook.name;
       this.desc = wordBook.desc;
@@ -106,6 +109,7 @@ export namespace WordBook {
       this.totalWordCount = wordBook.totalWordCount;
       this.wordList = wordList;
       this.type = wordBook.type;
+      this.learnedWordCount = learnedCount;
     }
 
     static readonly coverPathFormat = '%s/local_book/%s/cover.png'
@@ -120,6 +124,22 @@ export namespace WordBook {
         fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY
       );
       await fs.write(file.fd, JSON.stringify(this.wordList));
+      await fs.close(file)
+
+      let bookDesc: LocalBookDescStruct = {
+        name: this.name,
+        desc: this.desc,
+        total_word_count: this.totalWordCount,
+        type: this.type,
+        learned_word_count: this.learnedWordCount
+      }
+
+      file = await fs.open(
+        `${fileDir}/local_book/${this.id}/desc.json`,
+        fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY
+      );
+      await fs.write(file.fd, JSON.stringify(bookDesc));
+      await fs.close(file)
     };
 
     static async loadLocalBookList(): Promise<LocalBookListStruct> {
@@ -148,7 +168,7 @@ export namespace WordBook {
 
     static async load(id: string): Promise<LocalWordBook> {
       const fileDir = getContext(this).filesDir;
-      let coverPath = `${fileDir}/local_book/${id}/cover.png`;
+      let coverPath = fileUri.getUriFromPath(`${fileDir}/local_book/${id}/cover.png`);
       let desc: LocalBookDescStruct = JSON.parse(await fs.readText(`${fileDir}/local_book/${id}/desc.json`));
       let wordList: LocalBookWordList = JSON.parse(await fs.readText(`${fileDir}/local_book/${id}/word_list.json`));
       return new LocalWordBook({
@@ -157,9 +177,10 @@ export namespace WordBook {
         desc: desc.desc,
         cover: coverPath,
         totalWordCount: desc.total_word_count,
-        type: desc.type
+        type: desc.type,
       },
-        wordList);
+        wordList,
+        desc.learned_word_count);
     };
 
     static async queryAllBook(): Promise<LocalWordBook[]> {
@@ -224,7 +245,8 @@ export namespace WordBook {
         name: remoteBook.name,
         desc: remoteBook.desc,
         total_word_count: remoteBook.totalWordCount,
-        type: remoteBook.type
+        type: remoteBook.type,
+        learned_word_count: 0
       }
 
       file = await fs.open(
